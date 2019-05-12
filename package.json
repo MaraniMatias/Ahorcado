@@ -25,7 +25,7 @@
     "test:awesome": "mocha src/**/**.spec.js --watch --reporter mochawesome --reporter-options overwrite=true",
     "test:html": "mocha src/**/**.spec.js --watch --reporter mocha-simple-html-reporter --reporter-options output=mochawesome-report/report.html",
     "test:watch": "mocha src/**/*.spec.js --watch",
-    "test": "npmx mocha src/**/*.spec.js",
+    "test": "npx mocha src/**/*.spec.js",
     "nyc": "nyc mocha src/**/*.spec.js"
   },
   "author": "Marani Matias Ezequiel <maranimatias@gmail.com>",
