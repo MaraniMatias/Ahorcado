@@ -1,4 +1,3 @@
-class Ahorcado {
-}
+class Ahorcado {}
 
 module.exports = Ahorcado;

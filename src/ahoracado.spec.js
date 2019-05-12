@@ -1,7 +1,8 @@
 // TDD using RGR
 const chai = require("chai");
-const { assert, expect } = chai;
-const should = chai.should();
+const assert = chai.assert;
+// const expect = chai.expect;
+// const should = chai.should();
 const Ahorcado = require("./ahoracado");
 const game = new Ahorcado();
 
