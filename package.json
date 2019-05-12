@@ -28,6 +28,10 @@
     "test": "npmx mocha src/**/*.spec.js",
     "nyc": "nyc mocha src/**/*.spec.js"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Marani Matias Ezequiel <maranimatias@gmail.com>",
+  "license": "ISC",
+  "engines": {
+    "node": "^10.15.3",
+    "npm":"6.9.0"
+  }
 }
