@@ -24,8 +24,9 @@
     "live-server": "live-server --port=9000 --mount=:mochawesome-report",
     "test:awesome": "mocha src/**/**.spec.js --watch --reporter mochawesome --reporter-options overwrite=true",
     "test:html": "mocha src/**/**.spec.js --watch --reporter mocha-simple-html-reporter --reporter-options output=mochawesome-report/report.html",
-    "test": "mocha src/bowling.spec.js --watch",
-    "nyc": "nyc mocha src/**/**.spec.js"
+    "test:watch": "mocha src/**/*.spec.js --watch",
+    "test": "npmx mocha src/**/*.spec.js",
+    "nyc": "nyc mocha src/**/*.spec.js"
   },
   "author": "",
   "license": "ISC"
