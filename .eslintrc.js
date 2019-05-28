@@ -1,5 +1,8 @@
 module.exports = {
   // root: true,
+  parserOptions: {
+    ecmaVersion: 8 // or 2017
+  },
   globals: {
     // e.g "jquery": true,
   },
