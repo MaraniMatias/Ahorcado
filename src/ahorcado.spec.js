@@ -38,7 +38,7 @@ describe("Ahorcado", function() {
     "importancia".split("").forEach(letter => {
       game.check(letter);
     });
-    const result = game.score();
+    const result = game.getScore();
     assert(result.text === "ganaste");
   });
 
@@ -46,7 +46,7 @@ describe("Ahorcado", function() {
     "qwrysdfgbhj".split("").forEach(letter => {
       game.check(letter);
     });
-    const result = game.score();
+    const result = game.getScore();
     assert(result.text === "perdiste");
   });
 
@@ -54,7 +54,7 @@ describe("Ahorcado", function() {
     "qwrysdfgbhjklzximportancia".split("").forEach(letter => {
       game.check(letter);
     });
-    const result = game.score();
+    const result = game.getScore();
     assert(result.text === "perdiste");
   });
 
@@ -62,7 +62,7 @@ describe("Ahorcado", function() {
     "qwrysdimportancia".split("").forEach(letter => {
       game.check(letter);
     });
-    const result = game.score();
+    const result = game.getScore();
     assert(result.text === "ganaste");
   });
 
@@ -84,7 +84,7 @@ describe("Ahorcado", function() {
     palabra.split("").forEach(letter => {
       game.check(letter);
     });
-    const result = game.score();
+    const result = game.getScore();
     assert(result.text === "ganaste");
     // assert(palabra.length - 1 === result.score);
   });

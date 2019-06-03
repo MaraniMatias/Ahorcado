@@ -39,9 +39,10 @@ class Ahorcado {
     return word.join("");
   }
 
-  score() {
+  getScore() {
     const rta = {
-      text: this.inGame ? "ganaste" : "perdiste"
+      text: this.inGame ? "ganaste" : "perdiste",
+      score: this.score
     };
     return rta;
   }
