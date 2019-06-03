@@ -1,5 +1,7 @@
 class Ahorcado {
-  constructor() {}
+  constructor() {
+    this.score = 0;
+  }
 
   config({ jugador }) {
     this.jugador = jugador;
@@ -40,9 +42,10 @@ class Ahorcado {
   }
 
   getScore() {
+    const text = this.inGame ? "ganaste" : "perdiste";
     const rta = {
-      text: this.inGame ? "ganaste" : "perdiste",
-      score: this.score
+      text: typeof this.inGame !== "undefined" ? text : null,
+      score: this.inGame ? this.score : null
     };
     return rta;
   }

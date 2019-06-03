@@ -79,6 +79,13 @@ describe("Ahorcado", function() {
     assert(game.jugador === jugador);
   });
 
+  it("Antes de jugarr el puntage es 0", function() {
+    const game1 = new Ahorcado();
+    const result = game1.getScore();
+    assert(result.text === null);
+    assert(result.score === null);
+  });
+
   it("Calcular puntos, sin errores", function() {
     const palabra = game.palabra;
     palabra.split("").forEach(letter => {
