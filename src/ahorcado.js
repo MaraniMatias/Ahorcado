@@ -42,12 +42,12 @@ class Ahorcado {
   }
 
   getScore() {
-    const text = this.inGame ? "ganaste" : "perdiste";
-    const rta = {
-      text: typeof this.inGame !== "undefined" ? text : null,
-      score: this.inGame ? this.score : null
+    const rta = { text: null, score: null };
+    if (typeof this.inGame === "undefined") return rta;
+    return {
+      text: this.inGame ? "ganaste" : "perdiste",
+      score: this.score
     };
-    return rta;
   }
 }
 
