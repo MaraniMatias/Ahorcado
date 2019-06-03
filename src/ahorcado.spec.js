@@ -95,4 +95,28 @@ describe("Ahorcado", function() {
     assert(result.text === "ganaste");
     expect(result.score).equal(9);
   });
+
+  it("Calcular puntos, sin errores para OSO", function() {
+    game.forceSetPalabra("oso");
+    const palabra = game.palabra;
+    expect(game.palabra).equal("oso");
+    palabra.split("").forEach(letter => {
+      game.check(letter);
+    });
+    const result = game.getScore();
+    assert(result.text === "ganaste");
+    expect(result.score).equal(2);
+  });
+
+  it("Calcular puntos, sin errores para DOS", function() {
+    game.forceSetPalabra("dos");
+    const palabra = game.palabra;
+    expect(game.palabra).equal("dos");
+    palabra.split("").forEach(letter => {
+      game.check(letter);
+    });
+    const result = game.getScore();
+    assert(result.text === "ganaste");
+    expect(result.score).equal(3);
+  });
 });

@@ -13,6 +13,10 @@ class Ahorcado {
     this.score = 0;
   }
 
+  forceSetPalabra(word) {
+    this.palabra = word;
+  }
+
   check(letter) {
     const letterIsValid = this.palabra.indexOf(letter) > -1;
     if (letterIsValid) {
