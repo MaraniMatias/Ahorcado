@@ -119,4 +119,25 @@ describe("Ahorcado", function() {
     assert(result.text === "ganaste");
     expect(result.score).equal(3);
   });
+
+  it("Calcular puntos, con dos errores", function() {
+    const palabra = game.palabra;
+    game.check("9");
+    game.check("3");
+    palabra.split("").forEach(letter => {
+      game.check(letter);
+    });
+    const result = game.getScore();
+    assert(result.text === "ganaste");
+    expect(result.score).equal(7);
+  });
+
+  it("Se equivoca en todos los intentos, puntaje -7", function() {
+    "qwrysdfgbhj".split("").forEach(letter => {
+      game.check(letter);
+    });
+    const result = game.getScore();
+    assert(result.text === "perdiste");
+    expect(result.score).equal(-7);
+  });
 });

@@ -19,17 +19,21 @@ class Ahorcado {
 
   check(letter) {
     const letterIsValid = this.palabra.indexOf(letter) > -1;
-    if (letterIsValid) {
-      if (this.letterHistory.indexOf(letter) === -1) {
-        this.score = this.score + 1;
+    if (this.inGame) {
+      if (letterIsValid) {
+        if (this.letterHistory.indexOf(letter) === -1) {
+          this.score = this.score + 1;
+        }
+        this.letterHistory.push(letter);
       }
-      this.letterHistory.push(letter);
-    }
-    if (!letterIsValid && this.lifes > 0) {
-      this.lifes--;
-    }
-    if (this.lifes <= 0) {
-      this.inGame = false;
+      if (!letterIsValid && this.lifes > 0) {
+        this.lifes--;
+        this.score = this.score - 1;
+      }
+      if (this.lifes <= 0) {
+        this.score = this.score - 1;
+        this.inGame = false;
+      }
     }
     return letterIsValid;
   }
