@@ -33,16 +33,17 @@ class Ahorcado {
     }
     this.letterHistory.forEach(letter => {
       for (let i = 0; i <= this.palabra.length; i++) {
-        if (this.palabra[i] === letter) {
-          word[i] = letter;
-        }
+        if (this.palabra[i] === letter) word[i] = letter;
       }
     });
     return word.join("");
   }
 
   score() {
-    return this.inGame ? "ganaste" : "perdiste";
+    const rta = {
+      text: this.inGame ? "ganaste" : "perdiste"
+    };
+    return rta;
   }
 }
 

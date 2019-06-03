@@ -35,11 +35,11 @@ describe("Ahorcado", function() {
   });
 
   it("Adivinar palabra", function() {
-    "importancia".split().forEach(letter => {
+    "importancia".split("").forEach(letter => {
       game.check(letter);
     });
     const result = game.score();
-    assert(result === "ganaste");
+    assert(result.text === "ganaste");
   });
 
   it("Se equivoca en todos los intentos", function() {
@@ -47,7 +47,7 @@ describe("Ahorcado", function() {
       game.check(letter);
     });
     const result = game.score();
-    assert(result === "perdiste");
+    assert(result.text === "perdiste");
   });
 
   it("Solo 7 intentos", function() {
@@ -55,7 +55,7 @@ describe("Ahorcado", function() {
       game.check(letter);
     });
     const result = game.score();
-    assert(result === "perdiste");
+    assert(result.text === "perdiste");
   });
 
   it("Solo 1 intentos restante", function() {
@@ -63,7 +63,7 @@ describe("Ahorcado", function() {
       game.check(letter);
     });
     const result = game.score();
-    assert(result === "ganaste");
+    assert(result.text === "ganaste");
   });
 
   it("Mostar letras ingresadas y en sus posición", function() {
@@ -77,5 +77,15 @@ describe("Ahorcado", function() {
     const jugador = "matias";
     game.config({ jugador });
     assert(game.jugador === jugador);
+  });
+
+  it("Calcular puntos, sin errores", function() {
+    const palabra = game.palabra;
+    palabra.split("").forEach(letter => {
+      game.check(letter);
+    });
+    const result = game.score();
+    assert(result.text === "ganaste");
+    // assert(palabra.length - 1 === result.score);
   });
 });
