@@ -1,6 +1,10 @@
 class Ahorcado {
   constructor() {}
 
+  config({ jugador }) {
+    this.jugador = jugador;
+  }
+
   start() {
     this.palabra = "importancia";
     this.letterHistory = [];

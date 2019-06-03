@@ -20,7 +20,7 @@ describe("Ahorcado", function() {
     assert(typeof game.start === "function");
   });
 
-  it("Tiene que tner una palabra 'importancia'", function() {
+  it("Tiene que tener una palabra 'importancia'", function() {
     assert(game.palabra === "importancia");
   });
 
@@ -71,5 +71,11 @@ describe("Ahorcado", function() {
     game.check("a");
     const result = game.showGame();
     assert(result === "i_____a__ia");
+  });
+
+  it("Guardar nombre del jugador", function() {
+    const jugador = "matias";
+    game.config({ jugador });
+    assert(game.jugador === jugador);
   });
 });
