@@ -1,16 +1,24 @@
 class Ahorcado {
-  constructor() {}
+  constructor() {
+    this.dictionary = ["oso", "casa", "importancia", "perro"];
+  }
 
   config({ jugador }) {
     this.jugador = jugador;
   }
 
   start() {
-    this.palabra = "importancia";
+    this.palabra = this.getRandomWord();
     this.letterHistory = [];
     this.lifes = 7;
     this.inGame = true;
     this.score = 0;
+  }
+
+  getRandomWord() {
+    const getRandomInt = max => Math.floor(Math.random() * max);
+    const len = this.dictionary.length - 1;
+    return this.dictionary[getRandomInt(len)];
   }
 
   forceSetPalabra(word) {

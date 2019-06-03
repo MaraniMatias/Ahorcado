@@ -9,6 +9,7 @@ var game;
 beforeEach(function() {
   game = new Ahorcado();
   game.start();
+  game.forceSetPalabra("importancia");
 });
 
 describe("Ahorcado", function() {
@@ -139,5 +140,18 @@ describe("Ahorcado", function() {
     const result = game.getScore();
     assert(result.text === "perdiste");
     expect(result.score).equal(-7);
+  });
+
+  it("Exite un diccionario", function() {
+    const dictionary = game.dictionary;
+    assert(dictionary.length > 0);
+  });
+
+  it("Elegir una palabra del diccionario", function() {
+    const game = new Ahorcado();
+    const dictionary = game.dictionary;
+    game.start();
+    const palabraEnJuego = game.palabra;
+    assert(dictionary.indexOf(palabraEnJuego) > -1);
   });
 });
