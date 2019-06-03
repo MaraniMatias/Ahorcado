@@ -1,7 +1,5 @@
 class Ahorcado {
-  constructor() {
-    this.score = 0;
-  }
+  constructor() {}
 
   config({ jugador }) {
     this.jugador = jugador;
@@ -12,11 +10,15 @@ class Ahorcado {
     this.letterHistory = [];
     this.lifes = 7;
     this.inGame = true;
+    this.score = 0;
   }
 
   check(letter) {
     const letterIsValid = this.palabra.indexOf(letter) > -1;
     if (letterIsValid) {
+      if (this.letterHistory.indexOf(letter) === -1) {
+        this.score = this.score + 1;
+      }
       this.letterHistory.push(letter);
     }
     if (!letterIsValid && this.lifes > 0) {

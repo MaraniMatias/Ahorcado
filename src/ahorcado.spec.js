@@ -1,7 +1,7 @@
 // TDD using RGR
 const chai = require("chai");
 const assert = chai.assert;
-// const expect = chai.expect;
+const expect = chai.expect;
 // const should = chai.should();
 const Ahorcado = require("./ahorcado");
 
@@ -74,12 +74,12 @@ describe("Ahorcado", function() {
   });
 
   it("Guardar nombre del jugador", function() {
-    const jugador = "matias";
-    game.config({ jugador });
-    assert(game.jugador === jugador);
+    const nombre = "matias";
+    game.config({ jugador: nombre });
+    assert(game.jugador === nombre);
   });
 
-  it("Antes de jugarr el puntage es 0", function() {
+  it("Antes de jugarr el puntage es NULL", function() {
     const game = new Ahorcado();
     const result = game.getScore();
     assert(result.text === null);
@@ -93,6 +93,6 @@ describe("Ahorcado", function() {
     });
     const result = game.getScore();
     assert(result.text === "ganaste");
-    // assert(palabra.length - 1 === result.score);
+    expect(result.score).equal(9);
   });
 });
