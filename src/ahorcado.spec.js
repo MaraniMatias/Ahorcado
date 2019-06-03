@@ -144,14 +144,24 @@ describe("Ahorcado", function() {
 
   it("Exite un diccionario", function() {
     const dictionary = game.dictionary;
-    assert(dictionary.length > 0);
+    assert(typeof dictionary !== "undefined");
   });
 
-  it("Elegir una palabra del diccionario", function() {
+  it("Elegir un  palabra del diccionario", function() {
     const game = new Ahorcado();
-    const dictionary = game.dictionary;
+    const dictionary = game.dictionary["español"];
+    game.config({ idioma: "español" });
     game.start();
     const palabraEnJuego = game.palabra;
     assert(dictionary.indexOf(palabraEnJuego) > -1);
+  });
+
+  it("Diccionario en Español", function() {
+    const dictionary = game.dictionary;
+    assert(dictionary["español"]);
+  });
+  it("Diccionario en Ingles", function() {
+    const dictionary = game.dictionary;
+    assert(dictionary["ingles"]);
   });
 });

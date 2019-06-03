@@ -1,10 +1,19 @@
 class Ahorcado {
   constructor() {
-    this.dictionary = ["oso", "casa", "importancia", "perro"];
+    this.idioma = "español";
+    this.dictionary = {
+      español: ["oso", "casa", "importancia", "perro"],
+      ingles: ["home", "red"]
+    };
   }
 
-  config({ jugador }) {
-    this.jugador = jugador;
+  config({ jugador, idioma }) {
+    if (jugador) {
+      this.jugador = jugador;
+    }
+    if (idioma) {
+      this.idioma = idioma;
+    }
   }
 
   start() {
@@ -17,8 +26,8 @@ class Ahorcado {
 
   getRandomWord() {
     const getRandomInt = max => Math.floor(Math.random() * max);
-    const len = this.dictionary.length - 1;
-    return this.dictionary[getRandomInt(len)];
+    const len = this.dictionary[this.idioma].length - 1;
+    return this.dictionary[this.idioma][getRandomInt(len)];
   }
 
   forceSetPalabra(word) {
