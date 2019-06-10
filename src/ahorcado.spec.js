@@ -164,4 +164,29 @@ describe("Ahorcado", function() {
     const dictionary = game.dictionary;
     assert(dictionary["ingles"]);
   });
+  it("Diccionario en Aleman", function() {
+    const dictionary = game.dictionary;
+    assert(dictionary["aleman"]);
+  });
+
+  it("No repetir palabras para una configuracion dada", function() {
+    const g = new Ahorcado();
+    g.config({ idioma: "español" });
+    const dictionary = g.dictionary;
+    assert(dictionary["español"].length === 4);
+
+    g.start();
+    const palabraEnJuego1 = g.palabra;
+    g.start();
+    const palabraEnJuego2 = g.palabra;
+    g.start();
+    const palabraEnJuego3 = g.palabra;
+    g.start();
+    const palabraEnJuego4 = g.palabra;
+
+    expect(palabraEnJuego1)
+      .is.not.equal(palabraEnJuego2)
+      .is.not.equal(palabraEnJuego3)
+      .is.not.equal(palabraEnJuego4);
+  });
 });

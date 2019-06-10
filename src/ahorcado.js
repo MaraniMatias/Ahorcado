@@ -1,9 +1,11 @@
 class Ahorcado {
   constructor() {
+    this.wordHistory = [];
     this.idioma = "español";
     this.dictionary = {
       español: ["oso", "casa", "importancia", "perro"],
-      ingles: ["home", "bear", "beer"]
+      ingles: ["home", "bear", "beer"],
+      aleman: ["hallo", "hund", "elefant", "notizbuch"]
     };
   }
 
@@ -11,6 +13,7 @@ class Ahorcado {
    * Configuración, prepara el juego, la forma de jugar
    */
   config({ jugador, idioma }) {
+    this.wordHistory = [];
     if (jugador) {
       this.jugador = jugador;
     }
@@ -41,9 +44,20 @@ class Ahorcado {
     return Math.floor(Math.random() * max);
   }
   _getRandomWord() {
-    const len = this.dictionary[this.idioma].length - 1;
-    const randomIndex = this._getRandomInt(len);
-    return this.dictionary[this.idioma][randomIndex];
+    const indexMax = this.dictionary[this.idioma].length;
+    const randomIndex = this._getRandomInt(indexMax);
+    const word = this.dictionary[this.idioma][randomIndex];
+    if (this.wordHistory.indexOf(word) === -1) {
+      this.wordHistory.push(word);
+      return word;
+    } else {
+      if (this.wordHistory.length === indexMax) {
+        this.wordHistory = [];
+        return word;
+      } else {
+        return this._getRandomWord();
+      }
+    }
   }
 
   check(letter) {
