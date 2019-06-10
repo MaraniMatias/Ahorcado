@@ -70,7 +70,7 @@ describe("Ahorcado", function() {
   it("Mostar letras ingresadas y en sus posición", function() {
     game.check("i");
     game.check("a");
-    const result = game.showGame();
+    const result = game.showGameStatus();
     assert(result === "i_____a__ia");
   });
 

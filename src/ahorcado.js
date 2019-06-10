@@ -3,10 +3,13 @@ class Ahorcado {
     this.idioma = "español";
     this.dictionary = {
       español: ["oso", "casa", "importancia", "perro"],
-      ingles: ["home", "red"]
+      ingles: ["home", "bear", "beer"]
     };
   }
 
+  /*
+   * Configuración, prepara el juego, la forma de jugar
+   */
   config({ jugador, idioma }) {
     if (jugador) {
       this.jugador = jugador;
@@ -16,53 +19,69 @@ class Ahorcado {
     }
   }
 
+  /*
+   * Método usado para tests
+   */
+  forceSetPalabra(word) {
+    this.palabra = word;
+  }
+
+  /*
+   * Settea variable para comenzar a jugar
+   */
   start() {
-    this.palabra = this.getRandomWord();
+    this.palabra = this._getRandomWord();
     this.historyGuessedLetters = [];
     this.lifes = 7;
-    this.inGame = true;
+    this.inGame = true; // Indica que todavia se esta jugando
     this.score = 0;
   }
 
-  getRandomWord() {
-    const getRandomInt = max => Math.floor(Math.random() * max);
-    const len = this.dictionary[this.idioma].length - 1;
-    return this.dictionary[this.idioma][getRandomInt(len)];
+  _getRandomInt(max) {
+    return Math.floor(Math.random() * max);
   }
-
-  forceSetPalabra(word) {
-    this.palabra = word;
+  _getRandomWord() {
+    const len = this.dictionary[this.idioma].length - 1;
+    const randomIndex = this._getRandomInt(len);
+    return this.dictionary[this.idioma][randomIndex];
   }
 
   check(letter) {
     const letterIsValid = this.palabra.indexOf(letter) > -1;
     if (this.inGame) {
-      if (letterIsValid) {
-        if (this.historyGuessedLetters.indexOf(letter) === -1) {
-          this.score = this.score + 1;
-        }
-        this.historyGuessedLetters.push(letter);
-      }
-      if (!letterIsValid && this.lifes > 0) {
-        this.lifes--;
-        this.score = this.score - 1;
-      }
-      if (this.lifes <= 0) {
-        this.score = this.score - 1;
-        this.inGame = false;
-      }
+      this._calculateScore(letter, letterIsValid);
     }
     return letterIsValid;
   }
 
-  showGame() {
+  _calculateScore(letter, letterIsValid) {
+    if (letterIsValid) {
+      if (this.historyGuessedLetters.indexOf(letter) === -1) {
+        this.score = this.score + 1;
+      }
+      this.historyGuessedLetters.push(letter);
+    }
+    if (!letterIsValid && this.lifes > 0) {
+      this.lifes--;
+      this.score = this.score - 1;
+    }
+
+    if (this.lifes <= 0) {
+      this.score = this.score - 1;
+      this.inGame = false;
+    }
+  }
+
+  showGameStatus() {
     let word = [];
     for (let i = 0; i < this.palabra.length; i++) {
       word.push("_");
     }
-    this.historyGuessedLetters.forEach(letter => {
+    this.historyGuessedLetters.forEach(guessedLetters => {
       for (let i = 0; i <= this.palabra.length; i++) {
-        if (this.palabra[i] === letter) word[i] = letter;
+        if (this.palabra[i] === guessedLetters) {
+          word[i] = guessedLetters;
+        }
       }
     });
     return word.join("");
@@ -72,7 +91,7 @@ class Ahorcado {
     const rta = { text: null, score: null };
     if (typeof this.inGame === "undefined") return rta;
     return {
-      text: this.inGame ? "ganaste" : "perdiste",
+      text: this.lifes > 0 ? "ganaste" : "perdiste",
       score: this.score
     };
   }
