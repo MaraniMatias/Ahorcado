@@ -18,7 +18,7 @@ class Ahorcado {
 
   start() {
     this.palabra = this.getRandomWord();
-    this.letterHistory = [];
+    this.historyGuessedLetters = [];
     this.lifes = 7;
     this.inGame = true;
     this.score = 0;
@@ -38,10 +38,10 @@ class Ahorcado {
     const letterIsValid = this.palabra.indexOf(letter) > -1;
     if (this.inGame) {
       if (letterIsValid) {
-        if (this.letterHistory.indexOf(letter) === -1) {
+        if (this.historyGuessedLetters.indexOf(letter) === -1) {
           this.score = this.score + 1;
         }
-        this.letterHistory.push(letter);
+        this.historyGuessedLetters.push(letter);
       }
       if (!letterIsValid && this.lifes > 0) {
         this.lifes--;
@@ -60,7 +60,7 @@ class Ahorcado {
     for (let i = 0; i < this.palabra.length; i++) {
       word.push("_");
     }
-    this.letterHistory.forEach(letter => {
+    this.historyGuessedLetters.forEach(letter => {
       for (let i = 0; i <= this.palabra.length; i++) {
         if (this.palabra[i] === letter) word[i] = letter;
       }
