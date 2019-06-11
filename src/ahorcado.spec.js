@@ -196,6 +196,26 @@ describe("Ahorcado", function() {
       .is.not.equal(palabraEnJuego4);
   });
 
+  it("Repetir palabra despues de recorre todo el diccionario", function() {
+    game.start();
+    const palabraEnJuego1 = game.palabra;
+    game.start();
+    const palabraEnJuego2 = game.palabra;
+    game.start();
+    const palabraEnJuego3 = game.palabra;
+    game.start();
+    const palabraEnJuego4 = game.palabra;
+    game.start();
+    const palabraEnJuegoRepetida = game.palabra;
+
+    assert(
+      palabraEnJuegoRepetida === palabraEnJuego1 ||
+        palabraEnJuegoRepetida === palabraEnJuego2 ||
+        palabraEnJuegoRepetida === palabraEnJuego3 ||
+        palabraEnJuegoRepetida === palabraEnJuego4
+    );
+  });
+
   it("Nivel de dificulta por diccionario, fácil, medio, difícil", function() {
     const dictionaryObject = game.dictionary;
     Object.values(dictionaryObject).forEach(dictionary => {
