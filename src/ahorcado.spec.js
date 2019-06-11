@@ -197,12 +197,25 @@ describe("Ahorcado", function() {
   });
 
   it("Nivel de dificulta por diccionario, fácil, medio, difícil", function() {
-    const game = new Ahorcado();
     const dictionaryObject = game.dictionary;
     Object.values(dictionaryObject).forEach(dictionary => {
       expect(dictionary).to.have.property("easy");
       expect(dictionary).to.have.property("medium");
       expect(dictionary).to.have.property("hard");
     });
+  });
+
+  it("Generar link para compartir puntos por WhatsApp", function() {
+    const link = "https://wa.me/?text=¿Podes superarme?Mi puntaje es 7";
+    const palabra = game.palabra;
+    game.check("9");
+    game.check("3");
+    palabra.split("").forEach(letter => {
+      game.check(letter);
+    });
+    const { score } = game.getScore();
+    expect(score).equal(7);
+    const result = game.getLink();
+    expect(result).equal(link);
   });
 });

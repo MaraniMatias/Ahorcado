@@ -65,11 +65,11 @@ class Ahorcado {
       this.wordHistory.push(word);
       return word;
     } else {
-      if (this.wordHistory.length === indexMax) {
+      if (this.wordHistory.length !== indexMax) {
+        return this._getRandomWord();
+      } else {
         this.wordHistory = [];
         return word;
-      } else {
-        return this._getRandomWord();
       }
     }
   }
@@ -122,6 +122,10 @@ class Ahorcado {
       text: this.lifes > 0 ? "ganaste" : "perdiste",
       score: this.score
     };
+  }
+
+  getLink() {
+    return `https://wa.me/?text=¿Podes superarme?Mi puntaje es ${this.score}`;
   }
 }
 
