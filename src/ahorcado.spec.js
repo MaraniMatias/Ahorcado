@@ -5,6 +5,12 @@ const expect = chai.expect;
 // const should = chai.should();
 const Ahorcado = require("./ahorcado");
 
+function checkLetters(letterList) {
+  letterList.split("").forEach(letter => {
+    game.check(letter);
+  });
+}
+
 var game;
 beforeEach(function() {
   game = new Ahorcado();
@@ -36,33 +42,25 @@ describe("Ahorcado", function() {
   });
 
   it("Adivinar palabra", function() {
-    "importancia".split("").forEach(letter => {
-      game.check(letter);
-    });
+    checkLetters("importancia");
     const result = game.getScore();
     assert(result.text === "ganaste");
   });
 
   it("Se equivoca en todos los intentos", function() {
-    "qwrysdfgbhj".split("").forEach(letter => {
-      game.check(letter);
-    });
+    checkLetters("qwrysdfgbhj");
     const result = game.getScore();
     assert(result.text === "perdiste");
   });
 
   it("Solo 7 intentos", function() {
-    "qwrysdfgbhjklzximportancia".split("").forEach(letter => {
-      game.check(letter);
-    });
+    checkLetters("qwrysdfgbhjklzximportancia");
     const result = game.getScore();
     assert(result.text === "perdiste");
   });
 
   it("Solo 1 intentos restante", function() {
-    "qwrysdimportancia".split("").forEach(letter => {
-      game.check(letter);
-    });
+    checkLetters("qwrysdimportancia");
     const result = game.getScore();
     assert(result.text === "ganaste");
   });
@@ -101,9 +99,7 @@ describe("Ahorcado", function() {
     game.forceSetPalabra("oso");
     const palabra = game.palabra;
     expect(game.palabra).equal("oso");
-    palabra.split("").forEach(letter => {
-      game.check(letter);
-    });
+    checkLetters(palabra);
     const result = game.getScore();
     assert(result.text === "ganaste");
     expect(result.score).equal(2);
@@ -113,9 +109,7 @@ describe("Ahorcado", function() {
     game.forceSetPalabra("dos");
     const palabra = game.palabra;
     expect(game.palabra).equal("dos");
-    palabra.split("").forEach(letter => {
-      game.check(letter);
-    });
+    checkLetters(palabra);
     const result = game.getScore();
     assert(result.text === "ganaste");
     expect(result.score).equal(3);
@@ -125,18 +119,14 @@ describe("Ahorcado", function() {
     const palabra = game.palabra;
     game.check("9");
     game.check("3");
-    palabra.split("").forEach(letter => {
-      game.check(letter);
-    });
+    checkLetters(palabra);
     const result = game.getScore();
     assert(result.text === "ganaste");
     expect(result.score).equal(7);
   });
 
   it("Se equivoca en todos los intentos, puntaje -7", function() {
-    "qwrysdfgbhj".split("").forEach(letter => {
-      game.check(letter);
-    });
+    checkLetters("qwrysdfgbhj");
     const result = game.getScore();
     assert(result.text === "perdiste");
     expect(result.score).equal(-7);
@@ -230,9 +220,7 @@ describe("Ahorcado", function() {
     const palabra = game.palabra;
     game.check("9");
     game.check("3");
-    palabra.split("").forEach(letter => {
-      game.check(letter);
-    });
+    checkLetters(palabra);
     const { score } = game.getScore();
     expect(score).equal(7);
     const result = game.getLink();
