@@ -5,18 +5,18 @@ const expect = chai.expect;
 // const should = chai.should();
 const Ahorcado = require("./ahorcado");
 
-function checkLetters(letterList) {
-  letterList.split("").forEach(letter => {
-    game.check(letter);
-  });
-}
-
 var game;
 beforeEach(function() {
   game = new Ahorcado();
   game.start();
   game.forceSetPalabra("importancia");
 });
+
+function checkLetters(letterList) {
+  letterList.split("").forEach(letter => {
+    game.check(letter);
+  });
+}
 
 describe("Ahorcado", function() {
   it("Ahorcado is running", function() {
