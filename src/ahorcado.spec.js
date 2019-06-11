@@ -149,8 +149,11 @@ describe("Ahorcado", function() {
 
   it("Elegir un  palabra del diccionario", function() {
     const game = new Ahorcado();
-    const dictionary = game.dictionary["español"];
-    game.config({ idioma: "español" });
+    const idioma = "español";
+    const difficulty = "easy";
+
+    const dictionary = game.dictionary[idioma][difficulty];
+    game.config({ idioma, difficulty });
     game.start();
     const palabraEnJuego = game.palabra;
     assert(dictionary.indexOf(palabraEnJuego) > -1);
@@ -171,9 +174,12 @@ describe("Ahorcado", function() {
 
   it("No repetir palabras para una configuracion dada", function() {
     const g = new Ahorcado();
-    g.config({ idioma: "español" });
-    const dictionary = g.dictionary;
-    assert(dictionary["español"].length === 4);
+    const idioma = "español";
+    const difficulty = "easy";
+    g.config({ idioma, difficulty });
+
+    const dictionary = g.dictionary[idioma][difficulty];
+    assert(dictionary.length === 4);
 
     g.start();
     const palabraEnJuego1 = g.palabra;
@@ -188,5 +194,15 @@ describe("Ahorcado", function() {
       .is.not.equal(palabraEnJuego2)
       .is.not.equal(palabraEnJuego3)
       .is.not.equal(palabraEnJuego4);
+  });
+
+  it("Nivel de dificulta por diccionario, fácil, medio, difícil", function() {
+    const game = new Ahorcado();
+    const dictionaryObject = game.dictionary;
+    Object.values(dictionaryObject).forEach(dictionary => {
+      expect(dictionary).to.have.property("easy");
+      expect(dictionary).to.have.property("medium");
+      expect(dictionary).to.have.property("hard");
+    });
   });
 });
