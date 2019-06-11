@@ -2,18 +2,32 @@ class Ahorcado {
   constructor() {
     this.wordHistory = [];
     this.idioma = "español";
+    this.difficulty = "easy";
     this.dictionary = {
-      español: ["oso", "casa", "importancia", "perro"],
-      ingles: ["home", "bear", "beer"],
-      aleman: ["hallo", "hund", "elefant", "notizbuch"]
+      español: {
+        easy: ["oso", "casa", "perro", "otoño"],
+        medium: ["importancia", "colectivo", "heladera", "facultad"],
+        hard: ["helicoptero", "peyorativo", "misantropia", "filantropia", "epilepsia"]
+      },
+      ingles: {
+        easy: ["bear", "house", "dog", "autumn"],
+        medium: ["importance", "collective", "refrigerator", "faculty"],
+        hard: ["helicoptero", "pejorative", "misanthropy"]
+      },
+      aleman: {
+        easy: ["bär", "haus", "hund", "herbst"],
+        medium: ["bedeutung", "kollektiv", "kühlschrank", "fakultät"],
+        hard: ["misanthropy"]
+      }
     };
   }
 
   /*
    * Configuración, prepara el juego, la forma de jugar
    */
-  config({ jugador, idioma }) {
+  config({ jugador, idioma, difficulty }) {
     this.wordHistory = [];
+    this.difficulty = difficulty;
     if (jugador) {
       this.jugador = jugador;
     }
@@ -44,9 +58,9 @@ class Ahorcado {
     return Math.floor(Math.random() * max);
   }
   _getRandomWord() {
-    const indexMax = this.dictionary[this.idioma].length;
+    const indexMax = this.dictionary[this.idioma][this.difficulty].length;
     const randomIndex = this._getRandomInt(indexMax);
-    const word = this.dictionary[this.idioma][randomIndex];
+    const word = this.dictionary[this.idioma][this.difficulty][randomIndex];
     if (this.wordHistory.indexOf(word) === -1) {
       this.wordHistory.push(word);
       return word;
