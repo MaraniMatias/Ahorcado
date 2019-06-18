@@ -139,11 +139,11 @@ describe("Ahorcado", function() {
 
   it("Elegir un  palabra del diccionario", function() {
     const game = new Ahorcado();
-    const idioma = "español";
+    const language = "español";
     const difficulty = "easy";
 
-    const dictionary = game.dictionary[idioma][difficulty];
-    game.config({ idioma, difficulty });
+    const dictionary = game.dictionary[language][difficulty];
+    game.config({ language, difficulty });
     game.start();
     const palabraEnJuego = game.palabra;
     assert(dictionary.indexOf(palabraEnJuego) > -1);
@@ -164,11 +164,11 @@ describe("Ahorcado", function() {
 
   it("No repetir palabras para una configuracion dada", function() {
     const g = new Ahorcado();
-    const idioma = "español";
+    const language = "español";
     const difficulty = "easy";
-    g.config({ idioma, difficulty });
+    g.config({ language, difficulty });
 
-    const dictionary = g.dictionary[idioma][difficulty];
+    const dictionary = g.dictionary[language][difficulty];
     assert(dictionary.length === 4);
 
     g.start();

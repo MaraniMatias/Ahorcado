@@ -1,7 +1,7 @@
 class Ahorcado {
   constructor() {
     this.wordHistory = [];
-    this.idioma = "español";
+    this.language = "español";
     this.difficulty = "easy";
     this.dictionary = {
       español: {
@@ -25,14 +25,14 @@ class Ahorcado {
   /*
    * Configuración, prepara el juego, la forma de jugar
    */
-  config({ jugador, idioma, difficulty }) {
+  config({ jugador, language, difficulty }) {
     this.wordHistory = [];
     this.difficulty = difficulty;
     if (jugador) {
       this.jugador = jugador;
     }
-    if (idioma) {
-      this.idioma = idioma;
+    if (language) {
+      this.language = language;
     }
   }
 
@@ -58,9 +58,9 @@ class Ahorcado {
     return Math.floor(Math.random() * max);
   }
   _getRandomWord() {
-    const indexMax = this.dictionary[this.idioma][this.difficulty].length;
+    const indexMax = this.dictionary[this.language][this.difficulty].length;
     const randomIndex = this._getRandomInt(indexMax);
-    const word = this.dictionary[this.idioma][this.difficulty][randomIndex];
+    const word = this.dictionary[this.language][this.difficulty][randomIndex];
     if (this.wordHistory.indexOf(word) === -1) {
       this.wordHistory.push(word);
       return word;
@@ -75,9 +75,10 @@ class Ahorcado {
   }
 
   check(letter) {
-    const letterIsValid = this.palabra.indexOf(letter) > -1;
+    const normalizeLetter = letter.toLowerCase();
+    const letterIsValid = this.palabra.indexOf(normalizeLetter) > -1;
     if (this.inGame) {
-      this._calculateScore(letter, letterIsValid);
+      this._calculateScore(normalizeLetter, letterIsValid);
     }
     return letterIsValid;
   }
