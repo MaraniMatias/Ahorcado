@@ -31,6 +31,13 @@ describe("Ahorcado", function() {
     assert(game.palabra === "importancia");
   });
 
+  it("Solo mostrar mientas se juega no indicar estado", function() {
+    const result = game.getScore();
+    expect(result.text).to.equal("");
+    expect(result.text).to.not.equal("ganaste");
+    expect(result.text).to.not.equal("perdiste");
+  });
+
   it("Ingresar letra correcta", function() {
     const result = game.check("i");
     assert(result === true);
@@ -50,7 +57,7 @@ describe("Ahorcado", function() {
   it("Se equivoca en todos los intentos", function() {
     checkLetters("qwrysdfgbhj");
     const result = game.getScore();
-    assert(result.text === "perdiste");
+    expect(result.text).to.equal("perdiste");
   });
 
   it("Solo 7 intentos", function() {
@@ -225,5 +232,10 @@ describe("Ahorcado", function() {
     expect(score).equal(7);
     const result = game.getLink();
     expect(result).equal(link);
+  });
+
+  it("Mostrar vidas restantes", function() {
+    const result = game.getScore();
+    expect(result).to.have.property("lifes");
   });
 });

@@ -5,7 +5,7 @@ class Ahorcado {
     this.difficulty = "easy";
     this.dictionary = {
       español: {
-        easy: ["oso", "casa", "perro", "otoño"],
+        easy: ["oso", "casa", "perro", "primavera"],
         medium: ["importancia", "colectivo", "heladera", "facultad"],
         hard: ["helicoptero", "peyorativo", "misantropia", "filantropia", "epilepsia"]
       },
@@ -94,7 +94,6 @@ class Ahorcado {
       this.lifes--;
       this.score = this.score - 1;
     }
-
     if (this.lifes <= 0) {
       this.score = this.score - 1;
       this.inGame = false;
@@ -119,10 +118,11 @@ class Ahorcado {
   getScore() {
     const rta = { text: null, score: null };
     if (typeof this.inGame === "undefined") return rta;
-    return {
-      text: this.lifes > 0 ? "ganaste" : "perdiste",
-      score: this.score
-    };
+    let text = "";
+    const guessWord = this.showGameStatus().indexOf("_") === -1;
+    if (guessWord) text = "ganaste";
+    if (this.lifes <= 0) text = "perdiste";
+    return { text, score: this.score, lifes: this.lifes };
   }
 
   getLink() {
