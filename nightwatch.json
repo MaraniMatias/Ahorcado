@@ -1,6 +1,5 @@
 {
   "src_folders": ["src"],
-  "page_objects_path": "tests/pages",
   "webdriver": {
     "start_process": true,
     "server_path": "node_modules/.bin/geckodriver",

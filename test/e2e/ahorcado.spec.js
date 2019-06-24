@@ -1,15 +1,12 @@
 module.exports = {
-  "Demo test Google": function(client) {
+  "Cargar pagina desde github": function(client) {
     client
-      .url("https://www.google.com")
-      .waitForElementVisible("body", 1000)
-      .assert.title("Google")
-      .assert.visible("input[type=text]")
-      .setValue("input[type=text]", "rembrandt van rijn")
-      .waitForElementVisible("button[name=btnG]", 1000)
-      .click("button[name=btnG]")
+      .url("https://maranimatias.github.io/Ahorcado/")
+      .waitForElementVisible("body", 2000)
+      .assert.title("Ahorcado")
+      .assert.visible("h1.title.is-1")
       .pause(1000)
-      .assert.containsText("ol#rso li:first-child", "Rembrandt - Wikipedia")
+      .assert.containsText("h1.title.is-1", "Ahorcado")
       .end();
   }
 };
