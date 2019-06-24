@@ -1,0 +1,24 @@
+{
+  "src_folders": ["src"],
+  "webdriver": {
+    "start_process": true,
+    "server_path": "node_modules/.bin/geckodriver",
+    "cli_args": ["--log", "debug"],
+    "port": 4444
+  },
+  "test_settings": {
+    "chrome": {
+      "desiredCapabilities": {
+        "browserName": "chrome"
+      },
+      "server_path": "node_modules/.bin/chromedriver",
+      "port": 9515
+    },
+    "default": {
+      "desiredCapabilities": {
+        "browserName": "firefox",
+        "acceptInsecureCerts": true
+      }
+    }
+  }
+}

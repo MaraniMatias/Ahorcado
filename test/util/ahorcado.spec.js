@@ -3,7 +3,7 @@ const chai = require("chai");
 const assert = chai.assert;
 const expect = chai.expect;
 // const should = chai.should();
-const Ahorcado = require("./ahorcado");
+const Ahorcado = require("./../../src/ahorcado");
 
 var game;
 beforeEach(function() {
