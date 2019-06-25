@@ -5,6 +5,7 @@
   "main": "./src/index.html",
   "dependencies": {},
   "devDependencies": {
+    "@types/nightwatch": "^1.1.0",
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
     "@types/node": "^12.0.0",
@@ -28,13 +29,14 @@
   },
   "scripts": {
     "eslint": "npx eslint src/**/*.js",
-    "live-server": "live-server --port=9000 --mount=:mochawesome-report",
-    "nyc": "npx nyc mocha src/util/**/*.spec.js",
-    "test": "npx mocha test/util/**/*.spec.js",
+    "live-server": "npx live-server",
+    "test:live-server": "live-server --port=9000 --mount=:mochawesome-report",
+    "nyc": "npx nyc mocha src/unit/**/*.spec.js",
+    "test": "npx mocha test/unit/**/*.spec.js",
     "test:e2e": "npx nightwatch test/e2e/ahorcado.spec.js",
-    "test:html": "npx mocha test/util/**/*.spec.js --watch --reporter mocha-simple-html-reporter --reporter-options output=mochawesome-report/report.html",
-    "test:awesome": "npx mocha test/util/**/*.spec.js --watch --reporter mochawesome --reporter-options overwrite=true",
-    "test:watch": "npx mocha test/util/**/*.spec.js --watch"
+    "test:html": "npx mocha test/unit/**/*.spec.js --watch --reporter mocha-simple-html-reporter --reporter-options output=docs/index.html",
+    "test:awesome": "npx mocha test/unit/**/*.spec.js --watch --reporter mochawesome --reporter-options overwrite=true",
+    "test:watch": "npx mocha test/unit/**/*.spec.js --watch"
   },
   "author": "Marani Matias Ezequiel <maranimatias@gmail.com>",
   "license": "ISC",
