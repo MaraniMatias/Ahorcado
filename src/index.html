@@ -105,13 +105,19 @@
               </h1>
             </div>
             <div class="column  is-3" v-show="gameIsFinish== true">
+              <p
+                class="title is-1"
+                :class="{ 'has-text-success' : text === 'ganaste', 'has-text-danger' : text ==='perdiste' }"
+              >
+                {{ text }}
+              </p>
               <div class="level-item has-text-centered">
                 <div class="column">
-                  <p class="title is-2">Puntos</p>
+                  <p class="title is-3">Puntos</p>
                   <p class="title">{{ score }}</p>
                 </div>
                 <div class="column">
-                  <p class="title is-2">Vidas</p>
+                  <p class="title is-3">Vidas</p>
                   <p class="title">{{ lifes }}</p>
                 </div>
               </div>
@@ -141,7 +147,8 @@
           gameIsFinish: false,
           score: 0,
           lifes: 0,
-          link: ""
+          link: "",
+          text: ""
         },
         computed: {},
         methods: {
@@ -158,13 +165,13 @@
                   difficulty: this.difficulty
                 });
                 this.game.start();
+                console.log(this.game.palabra);
               }
               this.inGeame = true;
               this.gameIsFinish = false;
               this.score = 0;
               this.lifes = 0;
               this.showGameStatus = this.game.showGameStatus();
-              console.log(this.game.palabra);
             }
           },
           checkLetter({ key }) {
@@ -173,7 +180,8 @@
             const { score, text, lifes } = this.game.getScore();
             this.score = score;
             this.lifes = lifes;
-            if (text === "ganaste") {
+            this.text = text;
+            if (text === "ganaste" || text === "perdiste") {
               this.finish();
             }
           },
