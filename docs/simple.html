@@ -1,0 +1,601 @@
+
+<html>
+    <head>
+        <title>Mocha</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+        @charset "utf-8";
+
+body {
+  margin:0;
+}
+
+#mocha {
+  font: 20px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 60px 50px;
+}
+
+#mocha ul,
+#mocha li {
+  margin: 0;
+  padding: 0;
+}
+
+#mocha ul {
+  list-style: none;
+}
+
+#mocha h1,
+#mocha h2 {
+  margin: 0;
+}
+
+#mocha h1 {
+  margin-top: 15px;
+  font-size: 1em;
+  font-weight: 200;
+}
+
+#mocha h1 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#mocha h1 a:hover {
+  text-decoration: underline;
+}
+
+#mocha .suite .suite h1 {
+  margin-top: 0;
+  font-size: .8em;
+}
+
+#mocha .hidden {
+  display: none;
+}
+
+#mocha h2 {
+  font-size: 12px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+#mocha .suite {
+  margin-left: 15px;
+}
+
+#mocha .test {
+  margin-left: 15px;
+  overflow: hidden;
+}
+
+#mocha .test.pending:hover h2::after {
+  content: '(pending)';
+  font-family: arial, sans-serif;
+}
+
+#mocha .test.pass.medium .duration {
+  background: #c09853;
+}
+
+#mocha .test.pass.slow .duration {
+  background: #b94a48;
+}
+
+#mocha .test.pass::before {
+  content: '✓';
+  font-size: 12px;
+  display: block;
+  float: left;
+  margin-right: 5px;
+  color: #00d6b2;
+}
+
+#mocha .test.pass .duration {
+  font-size: 9px;
+  margin-left: 5px;
+  padding: 2px 5px;
+  color: #fff;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.2);
+  -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.2);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.2);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+
+#mocha .test.pass.fast .duration {
+  display: none;
+}
+
+#mocha .test.pending {
+  color: #0b97c4;
+}
+
+#mocha .test.pending::before {
+  content: '◦';
+  color: #0b97c4;
+}
+
+#mocha .test.fail {
+  color: #c00;
+}
+
+#mocha .test.fail pre {
+  color: black;
+}
+
+#mocha .test.fail::before {
+  content: '✖';
+  font-size: 12px;
+  display: block;
+  float: left;
+  margin-right: 5px;
+  color: #c00;
+}
+
+#mocha .test pre.error {
+  color: #c00;
+  max-height: 300px;
+  overflow: auto;
+}
+
+#mocha .test .html-error {
+  overflow: auto;
+  color: black;
+  line-height: 1.5;
+  display: block;
+  float: left;
+  clear: left;
+  font: 12px/1.5 monaco, monospace;
+  margin: 5px;
+  padding: 15px;
+  border: 1px solid #eee;
+  max-width: 85%; /*(1)*/
+  max-width: -webkit-calc(100% - 42px);
+  max-width: -moz-calc(100% - 42px);
+  max-width: calc(100% - 42px); /*(2)*/
+  max-height: 300px;
+  word-wrap: break-word;
+  border-bottom-color: #ddd;
+  -webkit-box-shadow: 0 1px 3px #eee;
+  -moz-box-shadow: 0 1px 3px #eee;
+  box-shadow: 0 1px 3px #eee;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+#mocha .test .html-error pre.error {
+  border: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: 0;
+  -moz-box-shadow: 0;
+  box-shadow: 0;
+  padding: 0;
+  margin: 0;
+  margin-top: 18px;
+  max-height: none;
+}
+
+/**
+ * (1): approximate for browsers not supporting calc
+ * (2): 42 = 2*15 + 2*10 + 2*1 (padding + margin + border)
+ *      ^^ seriously
+ */
+#mocha .test pre {
+  display: block;
+  float: left;
+  clear: left;
+  font: 12px/1.5 monaco, monospace;
+  margin: 5px;
+  padding: 15px;
+  border: 1px solid #eee;
+  max-width: 85%; /*(1)*/
+  max-width: -webkit-calc(100% - 42px);
+  max-width: -moz-calc(100% - 42px);
+  max-width: calc(100% - 42px); /*(2)*/
+  word-wrap: break-word;
+  border-bottom-color: #ddd;
+  -webkit-box-shadow: 0 1px 3px #eee;
+  -moz-box-shadow: 0 1px 3px #eee;
+  box-shadow: 0 1px 3px #eee;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+#mocha .test h2 {
+  position: relative;
+}
+
+#mocha .test a.replay {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  text-decoration: none;
+  vertical-align: middle;
+  display: block;
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  text-align: center;
+  background: #eee;
+  font-size: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  -webkit-transition:opacity 200ms;
+  -moz-transition:opacity 200ms;
+  -o-transition:opacity 200ms;
+  transition: opacity 200ms;
+  opacity: 0.3;
+  color: #888;
+}
+
+#mocha .test:hover a.replay {
+  opacity: 1;
+}
+
+#mocha-report.pass .test.fail {
+  display: none;
+}
+
+#mocha-report.fail .test.pass {
+  display: none;
+}
+
+#mocha-report.pending .test.pass,
+#mocha-report.pending .test.fail {
+  display: none;
+}
+#mocha-report.pending .test.pass.pending {
+  display: block;
+}
+
+#mocha-error {
+  color: #c00;
+  font-size: 1.5em;
+  font-weight: 100;
+  letter-spacing: 1px;
+}
+
+#mocha-stats {
+  position: fixed;
+  top: 15px;
+  right: 10px;
+  font-size: 12px;
+  margin: 0;
+  color: #888;
+  z-index: 1;
+}
+
+#mocha-stats .progress {
+  float: right;
+  padding-top: 0;
+
+  /**
+   * Set safe initial values, so mochas .progress does not inherit these
+   * properties from Bootstrap .progress (which causes .progress height to
+   * equal line height set in Bootstrap).
+   */
+  height: auto;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  background-color: initial;
+}
+
+#mocha-stats em {
+  color: black;
+}
+
+#mocha-stats a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#mocha-stats a:hover {
+  border-bottom: 1px solid #eee;
+}
+
+#mocha-stats li {
+  display: inline-block;
+  margin: 0 5px;
+  list-style: none;
+  padding-top: 11px;
+}
+
+#mocha-stats canvas {
+  width: 40px;
+  height: 40px;
+}
+
+#mocha code .comment { color: #ddd; }
+#mocha code .init { color: #2f6fad; }
+#mocha code .string { color: #5890ad; }
+#mocha code .keyword { color: #8a6343; }
+#mocha code .number { color: #2f6fad; }
+
+@media screen and (max-device-width: 480px) {
+  #mocha {
+    margin: 60px 0px;
+  }
+
+  #mocha #stats {
+    position: absolute;
+  }
+}
+#mocha .test.pass pre {
+    display: none;
+}
+
+#mocha .test.fail pre {
+    display: none;
+}
+
+#mocha .test pre.error {
+    display: block;
+}
+
+#mocha .test .html-error pre.error {
+    box-shadow: none;
+}
+
+#mocha .test:hover h2:after {
+    color: #888888;
+    content: "(view source)";
+    font-family: arial;
+    font-size: 12px;
+    position: relative;
+    right: -10px;
+    top: 0;
+}
+
+#mocha .test.pass.pending h2 {
+    cursor: auto;
+}
+
+#mocha .mocha-header {
+    right: 30px;
+    position: fixed;
+    top: 15px;
+    font-size: 14px;
+    margin: 0;
+    color: #888;
+    z-index: 1;
+}
+
+#mocha .mocha-header em {
+    font-style: normal;
+    color: black;
+}
+
+#mocha .mocha-header ul {
+    display: inline-block;
+}
+
+#mocha .mocha-stats li {
+    display: inline-block;
+    margin: 0 5px;
+    list-style: none;
+    padding-top: 11px;
+}
+
+#mocha .mocha-menu {
+    margin-right: 10px;
+}
+
+#mocha .mocha-menu li {
+    display: inline-block;
+    margin-left: 10px;
+    list-style: none;
+}
+
+#mocha .mocha-menu li span {
+    display: inline-block;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    padding: 3px 7px 2px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,.2);
+    border-radius: 5px;
+    user-select: none;
+}
+
+#mocha .mocha-menu li span.checked {
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,.2);
+}
+
+#mocha .toggle-passes {
+    background: #b94a48;
+}
+
+        </style>
+    </head>
+    <body>
+        <div id="mocha">
+            <div class="mocha-header">
+                <ul class="mocha-menu">
+                    <li><span id="toggle-passes" class="toggle-passes">show failures only</span></li>
+                </ul>
+                <ul class="mocha-stats">
+                    <li class="passes">passes: <em>28</em></li>
+                    <li class="pending">pending: <em>0</em></li>
+                    <li class="failures">failures: <em>0</em></li>
+                    <li class="duration">duration: <em>9ms</em></li>
+                </ul>
+            </div>
+            <ul id="report"><li class="suite"><h1>Ahorcado</h1><ul><li class="test pass fast"><h2>Ahorcado is running<span class="duration">1ms</span></h2><pre><code>assert(typeof game === &#x22;object&#x22;);</code></pre></li><li class="test pass fast"><h2>Tener un metodo start<span class="duration">0ms</span></h2><pre><code>assert(typeof game.start === &#x22;function&#x22;);</code></pre></li><li class="test pass fast"><h2>Tiene que tener una palabra &#x27;importancia&#x27;<span class="duration">0ms</span></h2><pre><code>assert(game.palabra === &#x22;importancia&#x22;);</code></pre></li><li class="test pass fast"><h2>Solo mostrar mientas se juega no indicar estado<span class="duration">0ms</span></h2><pre><code>const result = game.getScore();
+expect(result.text).to.equal(&#x22;&#x22;);
+expect(result.text).to.not.equal(&#x22;ganaste&#x22;);
+expect(result.text).to.not.equal(&#x22;perdiste&#x22;);</code></pre></li><li class="test pass fast"><h2>Ingresar letra correcta<span class="duration">0ms</span></h2><pre><code>const result = game.check(&#x22;i&#x22;);
+assert(result === true);</code></pre></li><li class="test pass fast"><h2>Ingresar letra incorrecta<span class="duration">0ms</span></h2><pre><code>const result = game.check(&#x22;w&#x22;);
+assert(result === false);</code></pre></li><li class="test pass fast"><h2>Adivinar palabra<span class="duration">0ms</span></h2><pre><code>checkLetters(&#x22;importancia&#x22;);
+const result = game.getScore();
+assert(result.text === &#x22;ganaste&#x22;);</code></pre></li><li class="test pass fast"><h2>Se equivoca en todos los intentos<span class="duration">1ms</span></h2><pre><code>checkLetters(&#x22;qwrysdfgbhj&#x22;);
+const result = game.getScore();
+expect(result.text).to.equal(&#x22;perdiste&#x22;);</code></pre></li><li class="test pass fast"><h2>Solo 7 intentos<span class="duration">0ms</span></h2><pre><code>checkLetters(&#x22;qwrysdfgbhjklzximportancia&#x22;);
+const result = game.getScore();
+assert(result.text === &#x22;perdiste&#x22;);</code></pre></li><li class="test pass fast"><h2>Solo 1 intentos restante<span class="duration">0ms</span></h2><pre><code>checkLetters(&#x22;qwrysdimportancia&#x22;);
+const result = game.getScore();
+assert(result.text === &#x22;ganaste&#x22;);</code></pre></li><li class="test pass fast"><h2>Mostar letras ingresadas y en sus posici&#xF3;n<span class="duration">0ms</span></h2><pre><code>game.check(&#x22;i&#x22;);
+game.check(&#x22;a&#x22;);
+const result = game.showGameStatus();
+assert(result === &#x22;i_____a__ia&#x22;);</code></pre></li><li class="test pass fast"><h2>Guardar nombre del jugador<span class="duration">0ms</span></h2><pre><code>const nombre = &#x22;matias&#x22;;
+game.config({ jugador: nombre });
+assert(game.jugador === nombre);</code></pre></li><li class="test pass fast"><h2>Antes de jugarr el puntage es NULL<span class="duration">0ms</span></h2><pre><code>const game = new Ahorcado();
+const result = game.getScore();
+assert(result.text === null);
+assert(result.score === null);</code></pre></li><li class="test pass fast"><h2>Calcular puntos, sin errores<span class="duration">0ms</span></h2><pre><code>const palabra = game.palabra;
+palabra.split(&#x22;&#x22;).forEach(letter =&#x3E; {
+  game.check(letter);
+});
+const result = game.getScore();
+assert(result.text === &#x22;ganaste&#x22;);
+expect(result.score).equal(9);</code></pre></li><li class="test pass fast"><h2>Calcular puntos, sin errores para OSO<span class="duration">0ms</span></h2><pre><code>game.forceSetPalabra(&#x22;oso&#x22;);
+const palabra = game.palabra;
+expect(game.palabra).equal(&#x22;oso&#x22;);
+checkLetters(palabra);
+const result = game.getScore();
+assert(result.text === &#x22;ganaste&#x22;);
+expect(result.score).equal(2);</code></pre></li><li class="test pass fast"><h2>Calcular puntos, sin errores para DOS<span class="duration">0ms</span></h2><pre><code>game.forceSetPalabra(&#x22;dos&#x22;);
+const palabra = game.palabra;
+expect(game.palabra).equal(&#x22;dos&#x22;);
+checkLetters(palabra);
+const result = game.getScore();
+assert(result.text === &#x22;ganaste&#x22;);
+expect(result.score).equal(3);</code></pre></li><li class="test pass fast"><h2>Calcular puntos, con dos errores<span class="duration">0ms</span></h2><pre><code>const palabra = game.palabra;
+game.check(&#x22;9&#x22;);
+game.check(&#x22;3&#x22;);
+checkLetters(palabra);
+const result = game.getScore();
+assert(result.text === &#x22;ganaste&#x22;);
+expect(result.score).equal(7);</code></pre></li><li class="test pass fast"><h2>Se equivoca en todos los intentos, puntaje -7<span class="duration">0ms</span></h2><pre><code>checkLetters(&#x22;qwrysdfgbhj&#x22;);
+const result = game.getScore();
+assert(result.text === &#x22;perdiste&#x22;);
+expect(result.score).equal(-7);</code></pre></li><li class="test pass fast"><h2>Exite un diccionario<span class="duration">0ms</span></h2><pre><code>const dictionary = game.dictionary;
+assert(typeof dictionary !== &#x22;undefined&#x22;);</code></pre></li><li class="test pass fast"><h2>Elegir un  palabra del diccionario<span class="duration">0ms</span></h2><pre><code>const game = new Ahorcado();
+const language = &#x22;espa&#xF1;ol&#x22;;
+const difficulty = &#x22;easy&#x22;;
+const dictionary = game.dictionary[language][difficulty];
+game.config({ language, difficulty });
+game.start();
+const palabraEnJuego = game.palabra;
+assert(dictionary.indexOf(palabraEnJuego) &#x3E; -1);</code></pre></li><li class="test pass fast"><h2>Diccionario en Espa&#xF1;ol<span class="duration">0ms</span></h2><pre><code>const dictionary = game.dictionary;
+assert(dictionary[&#x22;espa&#xF1;ol&#x22;]);</code></pre></li><li class="test pass fast"><h2>Diccionario en Ingles<span class="duration">0ms</span></h2><pre><code>const dictionary = game.dictionary;
+assert(dictionary[&#x22;ingles&#x22;]);</code></pre></li><li class="test pass fast"><h2>Diccionario en Aleman<span class="duration">0ms</span></h2><pre><code>const dictionary = game.dictionary;
+assert(dictionary[&#x22;aleman&#x22;]);</code></pre></li><li class="test pass fast"><h2>No repetir palabras para una configuracion dada<span class="duration">0ms</span></h2><pre><code>const g = new Ahorcado();
+const language = &#x22;espa&#xF1;ol&#x22;;
+const difficulty = &#x22;easy&#x22;;
+g.config({ language, difficulty });
+const dictionary = g.dictionary[language][difficulty];
+assert(dictionary.length === 4);
+g.start();
+const palabraEnJuego1 = g.palabra;
+g.start();
+const palabraEnJuego2 = g.palabra;
+g.start();
+const palabraEnJuego3 = g.palabra;
+g.start();
+const palabraEnJuego4 = g.palabra;
+expect(palabraEnJuego1)
+  .is.not.equal(palabraEnJuego2)
+  .is.not.equal(palabraEnJuego3)
+  .is.not.equal(palabraEnJuego4);</code></pre></li><li class="test pass fast"><h2>Repetir palabra despues de recorre todo el diccionario<span class="duration">0ms</span></h2><pre><code>game.start();
+const palabraEnJuego1 = game.palabra;
+game.start();
+const palabraEnJuego2 = game.palabra;
+game.start();
+const palabraEnJuego3 = game.palabra;
+game.start();
+const palabraEnJuego4 = game.palabra;
+game.start();
+const palabraEnJuegoRepetida = game.palabra;
+assert(
+  palabraEnJuegoRepetida === palabraEnJuego1 ||
+    palabraEnJuegoRepetida === palabraEnJuego2 ||
+    palabraEnJuegoRepetida === palabraEnJuego3 ||
+    palabraEnJuegoRepetida === palabraEnJuego4
+);</code></pre></li><li class="test pass fast"><h2>Nivel de dificulta por diccionario, f&#xE1;cil, medio, dif&#xED;cil<span class="duration">1ms</span></h2><pre><code>const dictionaryObject = game.dictionary;
+Object.values(dictionaryObject).forEach(dictionary =&#x3E; {
+  expect(dictionary).to.have.property(&#x22;easy&#x22;);
+  expect(dictionary).to.have.property(&#x22;medium&#x22;);
+  expect(dictionary).to.have.property(&#x22;hard&#x22;);
+});</code></pre></li><li class="test pass fast"><h2>Generar link para compartir puntos por WhatsApp<span class="duration">0ms</span></h2><pre><code>const link = &#x22;https://wa.me/?text=&#xBF;Podes superarme?Mi puntaje es 7&#x22;;
+const palabra = game.palabra;
+game.check(&#x22;9&#x22;);
+game.check(&#x22;3&#x22;);
+checkLetters(palabra);
+const { score } = game.getScore();
+expect(score).equal(7);
+const result = game.getLink();
+expect(result).equal(link);</code></pre></li><li class="test pass fast"><h2>Mostrar vidas restantes<span class="duration">0ms</span></h2><pre><code>const result = game.getScore();
+expect(result).to.have.property(&#x22;lifes&#x22;);</code></pre></li></ul></li></ul>
+        </div>
+        <script>
+        function hideSuitesWithout(className) {
+    var suites = document.querySelectorAll('#report > .suite');
+
+    for (var i = 0; i < suites.length; i++) {
+        let suite = suites[i];
+
+        var els = suite.getElementsByClassName(className);
+        if (!els.length) {
+            suite.classList.add('hidden');
+        }
+    }
+}
+
+function unhide() {
+    var suites = document.getElementsByClassName('suite hidden');
+
+    while (suites.length) {
+        suites[0].classList.remove('hidden');
+    }
+}
+
+function togglePasses() {
+    var report = document.getElementById('report');
+
+    report.classList.toggle('hide-passes');
+
+    if (report.classList.contains('hide-passes')) {
+        hideSuitesWithout('test fail');
+    } else {
+        unhide();
+    }
+}
+
+document.getElementById('toggle-passes').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    this.classList.toggle('checked');
+
+    togglePasses();
+});
+
+var tests = document.getElementsByClassName('test');
+
+for (var i = 0; i < tests.length; i++) {
+    var elem = tests[i];
+    var head = elem.children[0];
+
+    head.onclick = function () {
+        var code = this.parentElement.children[1];
+        var display = code.style.display;
+
+        if (display && display === 'block') {
+            code.style.display = 'none';
+        } else {
+            code.style.display = 'block';
+        }
+    };
+}
+        </script>
+    </body>
+</html>
