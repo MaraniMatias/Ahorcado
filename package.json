@@ -31,7 +31,7 @@
     "eslint": "npx eslint src/**/*.js",
     "live-server": "npx live-server",
     "test:live-server": "live-server --port=9000 --mount=:mochawesome-report",
-    "nyc": "npx nyc mocha src/unit/**/*.spec.js",
+    "nyc": "npx nyc mocha test/unit/**/*.spec.js",
     "test": "npx mocha test/unit/**/*.spec.js",
     "test:e2e": "npx nightwatch test/e2e/ahorcado.spec.js",
     "test:html": "npx mocha test/unit/**/*.spec.js --watch --reporter mocha-simple-html-reporter --reporter-options output=docs/index.html",
