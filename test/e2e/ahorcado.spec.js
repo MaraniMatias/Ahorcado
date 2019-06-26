@@ -6,22 +6,27 @@ module.exports = {
       .assert.title("Ahorcado")
       .assert.visible("h1.title.is-1")
       .pause(1000)
-      .assert.containsText("h1.title.is-1", "Ahorcado")
-      .end();
+      .assert.containsText("h1.title.is-1", "Ahorcado");
+    // .end();
   },
   "Cambiar el nombre del jugador a 'Ahorcado'": function(client) {
-    const inputName = "input[type=text].input";
+    const inputName = "#playerName";
     client
-      .url("http://127.0.0.1:8080/src/index.html")
       .pause(500)
       .assert.visible(inputName)
       .clearValue(inputName)
-      .setValue(inputName, "Ahorcado")
+      .setValue(inputName, "Test");
+  },
+  "Establecer palabra manualmente, 'agiles'": function(client) {
+    const checkboxWord = "#checkboxWord";
+    const inputWord = "#inputWord";
+    client
       .pause(500)
-      .getValue(inputName, function(result) {
-        this.assert.equal(typeof result, "object");
-        this.assert.equal(result.value, "Ahorcado");
-        this.end();
-      });
+      .assert.visible(checkboxWord)
+      .click(checkboxWord)
+      .pause(500)
+      .assert.visible(inputWord)
+      .setValue(inputWord, "agiles")
+      .end();
   }
 };
