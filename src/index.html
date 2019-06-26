@@ -101,9 +101,10 @@
             <!-- CONFIG::END -->
             <div class="column  is-3" v-show="inGeame == true">
               <p class="title  is-3">¿Cual es la palabra?</p>
-              <h1 class="title">
+              <h1 class="title" id="showGameStatus">
                 {{ showGameStatus }}
               </h1>
+                  <input class="input" type="text" id="inputKeys"/>
             </div>
             <div class="column  is-3" v-show="gameIsFinish== true">
               <p
