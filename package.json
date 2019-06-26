@@ -5,7 +5,7 @@
   "main": "./src/index.html",
   "scripts": {
     "eslint": "npx eslint src/**/*.js",
-    "live-server": "npx live-server --mount:src",
+    "live-server": "live-server",
     "test:live-server": "live-server --port=9000 --mount=:mochawesome-report",
     "nyc": "npx nyc mocha test/unit/**/*.spec.js",
     "test": "npx mocha test/unit/**/*.spec.js",

@@ -1,16 +1,9 @@
-/*
-function pressKeys(browser, keysList) {
+function pressKeys(browser, element, keysList) {
   keysList.split("").forEach(key => {
-    browser.keys(key, function(done) {
-      browser.pause(500);
-      browser.expect
-        .element("#carousel_container")
-        .to.have.css("display")
-        .which.equals("block");
-    });
+    browser.clearValue(element).setValue(element, key);
   });
+  return browser;
 }
-*/
 
 module.exports = {
   "Cargar pagina desde local server": function(browser) {
@@ -19,41 +12,37 @@ module.exports = {
       .waitForElementVisible("body", 2000)
       .assert.title("Ahorcado")
       .assert.visible("h1.title.is-1")
-      .pause(1000)
       .assert.containsText("h1.title.is-1", "Ahorcado");
   },
   "Cambiar el nombre del jugador a 'Ahorcado'": function(browser) {
     const inputName = "#playerName";
-    browser
-      .pause(500)
-      .assert.visible(inputName)
+    browser.assert
+      .visible(inputName)
       .clearValue(inputName)
       .setValue(inputName, "Test");
   },
   "Establecer palabra manualmente, 'agiles'": function(browser) {
     const checkboxWord = "#checkboxWord";
     const inputWord = "#inputWord";
-    browser
-      .pause(500)
-      .assert.visible(checkboxWord)
+    browser.assert
+      .visible(checkboxWord)
       .click(checkboxWord)
-      .pause(500)
       .assert.visible(inputWord)
       .setValue(inputWord, "agiles");
   },
   "Adivinar palabra": function(browser) {
     const buttonStart = "button.button.is-primary";
     const showGameStatus = "#showGameStatus";
-    // const inputKeys = "#inputKeys";
+    const inputKeys = "#inputKeys";
     browser.assert
       .visible(buttonStart)
       .click(buttonStart)
-      .pause(500)
-      .assert.visible(showGameStatus)
-      .pause(1000);
-    // browser.keys("t", function(done) {
-    // browser.pause(5000);
+      .assert.visible(showGameStatus);
+    pressKeys(browser, inputKeys, "agiles")
+      // .expect.element(".is-1.has-text-success").to.be.an("p")
+      .expect.element(".is-1.has-text-success")
+      .text.to.equal("ganaste");
+    browser.pause(700);
     browser.end();
-    // });
   }
 };

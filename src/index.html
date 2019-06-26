@@ -50,7 +50,7 @@
               <div class="field">
                 <div class="control">
                   <label class="checkbox">
-                    <input type="checkbox" v-model="setWord" id="checkboxWord"/>
+                    <input type="checkbox" v-model="setWord" id="checkboxWord" />
                     Indicar palabra manualmente
                   </label>
                 </div>
@@ -85,7 +85,13 @@
               <div class="field" v-else>
                 <label class="label">Palabra</label>
                 <div class="control">
-                  <input class="input" type="text" v-model="word" id="inputWord"/>
+                  <input
+                    class="input"
+                    type="text"
+                    v-model="word"
+                    id="inputWord"
+                    @keyup.enter="start()"
+                  />
                 </div>
               </div>
 
@@ -104,7 +110,18 @@
               <h1 class="title" id="showGameStatus">
                 {{ showGameStatus }}
               </h1>
-                  <input class="input" type="text" id="inputKeys"/>
+              <div class="field">
+                <label class="label">Letra a probar</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    type="text"
+                    id="inputKeys"
+                    v-model="inputKeys"
+                    @keyup="checkLetter({key:inputKeys})"
+                  />
+                </div>
+              </div>
             </div>
             <div class="column  is-3" v-show="gameIsFinish== true">
               <p
@@ -169,6 +186,7 @@
                 this.game.start();
                 console.log(this.game.palabra);
               }
+              this.word = null;
               this.inGeame = true;
               this.gameIsFinish = false;
               this.score = 0;
@@ -199,16 +217,20 @@
             this.score = 0;
             this.lifes = 0;
             this.link = "";
+            this.game = null;
+            this.setWord = false;
+            this.word = "";
+            this.text = "";
+          },
+          keyup(ev) {
+            // console.log(ev);
+            if (this.inGeame === true && /^Key/.test(ev.code)) {
+              this.checkLetter(ev);
+            }
           }
         },
         mounted() {
-          let self = this;
-          window.addEventListener("keyup", function(ev) {
-            // console.log(ev);
-            if (self.inGeame === true && /^Key/.test(ev.code)) {
-              self.checkLetter(ev);
-            }
-          });
+          window.addEventListener("keyup", this.keyup);
         }
       });
     </script>
