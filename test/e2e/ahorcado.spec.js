@@ -1,7 +1,7 @@
 module.exports = {
-  "Cargar pagina desde github": function(client) {
+  "Cargar pagina desde local server": function(client) {
     client
-      .url("http://127.0.0.1:8080/docs/index.html")
+      .url("http://127.0.0.1:8080/src/index.html")
       .waitForElementVisible("body", 2000)
       .assert.title("Ahorcado")
       .assert.visible("h1.title.is-1")
@@ -12,7 +12,7 @@ module.exports = {
   "Cambiar el nombre del jugador a 'Ahorcado'": function(client) {
     const inputName = "input[type=text].input";
     client
-      .url("http://127.0.0.1:8080/docs/index.html")
+      .url("http://127.0.0.1:8080/src/index.html")
       .pause(500)
       .assert.visible(inputName)
       .clearValue(inputName)

@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Ahorcado</title>
-    <script src="https://unpkg.com/vue"></script>
     <!--
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="./../src//ahorcado.js" type="text/javascript"></script>
     <link
       rel="stylesheet"
@@ -46,8 +46,16 @@
                   />
                 </div>
               </div>
+              <div class="field">
+                <div class="control">
+                  <label class="checkbox">
+                    <input type="checkbox" v-model="setWord" />
+                    Indicar palabra manualmente
+                  </label>
+                </div>
+              </div>
 
-              <div class="field is-grouped">
+              <div class="field is-grouped" v-if="!setWord">
                 <div class="control">
                   <label class="label">Lenguaje</label>
                   <div class="control">
@@ -55,7 +63,7 @@
                       <select v-model="language">
                         <option value="español">Español</option>
                         <option value="ingles">Ingles</option>
-                        <option value="aleman">Aleman</option>
+                        <option value="aleman">Alemán</option>
                       </select>
                     </div>
                   </div>
@@ -71,6 +79,12 @@
                       </select>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div class="field" v-else>
+                <label class="label">Palabra</label>
+                <div class="control">
+                  <input class="input" type="text" v-model="word" />
                 </div>
               </div>
 
@@ -121,6 +135,8 @@
           language: "español",
           difficulty: "easy",
           inGeame: false,
+          setWord: false,
+          word: "",
           showGameStatus: "",
           gameIsFinish: false,
           score: 0,
@@ -132,12 +148,17 @@
           start() {
             if (this.name) {
               this.game = new Ahorcado();
-              this.game.config({
-                jugador: this.name,
-                language: this.language,
-                difficulty: this.difficulty
-              });
-              this.game.start();
+              if (this.setWord) {
+                this.game.start();
+                this.game.forceSetPalabra(this.word);
+              } else {
+                this.game.config({
+                  jugador: this.name,
+                  language: this.language,
+                  difficulty: this.difficulty
+                });
+                this.game.start();
+              }
               this.inGeame = true;
               this.gameIsFinish = false;
               this.score = 0;

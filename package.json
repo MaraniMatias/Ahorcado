@@ -3,6 +3,17 @@
   "version": "1.0.0",
   "description": "TP para la materia agiles",
   "main": "./src/index.html",
+  "scripts": {
+    "eslint": "npx eslint src/**/*.js",
+    "live-server": "npx live-server --mount:src",
+    "test:live-server": "live-server --port=9000 --mount=:mochawesome-report",
+    "nyc": "npx nyc mocha test/unit/**/*.spec.js",
+    "test": "npx mocha test/unit/**/*.spec.js",
+    "test:e2e": "npx nightwatch test/e2e/ahorcado.spec.js",
+    "test:html": "npx mocha test/unit/**/*.spec.js --watch --reporter mocha-simple-html-reporter --reporter-options output=docs/index.html",
+    "test:awesome": "npx mocha test/unit/**/*.spec.js --watch --reporter mochawesome --reporter-options overwrite=true",
+    "test:watch": "npx mocha test/unit/**/*.spec.js --watch"
+  },
   "dependencies": {},
   "devDependencies": {
     "@types/chai": "^4.1.7",
@@ -26,17 +37,6 @@
     "nock": "^10.0.6",
     "prettier": "^1.18.2",
     "sinon": "^7.3.2"
-  },
-  "scripts": {
-    "eslint": "npx eslint src/**/*.js",
-    "live-server": "npx live-server",
-    "test:live-server": "live-server --port=9000 --mount=:mochawesome-report",
-    "nyc": "npx nyc mocha test/unit/**/*.spec.js",
-    "test": "npx mocha test/unit/**/*.spec.js",
-    "test:e2e": "npx nightwatch test/e2e/ahorcado.spec.js",
-    "test:html": "npx mocha test/unit/**/*.spec.js --watch --reporter mocha-simple-html-reporter --reporter-options output=docs/index.html",
-    "test:awesome": "npx mocha test/unit/**/*.spec.js --watch --reporter mochawesome --reporter-options overwrite=true",
-    "test:watch": "npx mocha test/unit/**/*.spec.js --watch"
   },
   "author": "Marani Matias Ezequiel <maranimatias@gmail.com>",
   "license": "ISC",
