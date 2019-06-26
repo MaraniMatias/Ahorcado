@@ -118,8 +118,8 @@
                     class="input"
                     type="text"
                     id="inputKeys"
-                    v-model="inputKeys"
-                    @keyup="checkLetter({key:inputKeys})"
+                    v-model="key"
+                    @keyup="checkLetter({key:key})"
                   />
                 </div>
               </div>
@@ -169,7 +169,8 @@
           score: 0,
           lifes: 0,
           link: "",
-          text: ""
+          text: "",
+          key:null
         },
         computed: {},
         methods: {
