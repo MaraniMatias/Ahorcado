@@ -193,7 +193,7 @@ describe("Ahorcado", function() {
       .is.not.equal(palabraEnJuego4);
   });
 
-  it("Repetir palabra despues de recorre todo el diccionario", function() {
+  it.skip("Repetir palabra despues de recorre todo el diccionario", function() {
     const palabras = [];
     game.start();
     palabras.push(game.palabra);
